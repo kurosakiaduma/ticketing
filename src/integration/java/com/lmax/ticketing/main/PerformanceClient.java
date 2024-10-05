@@ -1,5 +1,7 @@
 package com.lmax.ticketing.main;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -79,7 +81,7 @@ public class PerformanceClient implements Runnable
                 
                 while (!foundResponse)
                 {
-                    URL responseUrl = new URL(baseUrl + version);
+                    URL responseUrl = Urls.create(baseUrl + version, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
                     
                     cn = (HttpURLConnection) responseUrl.openConnection();
                     
